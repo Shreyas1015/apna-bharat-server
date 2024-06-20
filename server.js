@@ -8,6 +8,7 @@ const residentRoute = require("./src/routes/residentRoute");
 const laboursRoute = require("./src/routes/laboursRoute");
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./src/middlewares/errorMiddleware");
+const cors = require("cors");
 
 const corsOptions = require("./src/middlewares/corsMiddleware");
 const stripe = require("stripe")(process.env.SK_TEST_KEY);
@@ -18,7 +19,7 @@ const app = express();
 
 //MiddleWare
 app.use(express.json());
-app.use(corsOptions);
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use("/auth", authRoutes);
