@@ -11,10 +11,9 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: parseInt(process.env.DB_PORT),
-  // ssl: {
-  //   rejectUnauthorized: true, // Ensure the server's certificate is valid
-  //   ca: ca, // Use the CA certificate for verification
-  // },
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 console.log(
