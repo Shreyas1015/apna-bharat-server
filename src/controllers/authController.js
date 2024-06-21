@@ -12,9 +12,15 @@ console.log("SecretKey :", secretKey);
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.TRANSPORTER_EMAIL,
     pass: process.env.TRANSPORTER_PASS,
+  },
+  tls: {
+    rejectUnauthorized: true,
   },
 });
 
