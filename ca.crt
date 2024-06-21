@@ -1,15 +1,4 @@
-require("dotenv").config();
-const { Pool } = require("pg");
-
-const pool = new Pool({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  ssl: {
-    rejectUnauthorized: true,
-    ca: `-----BEGIN CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
 MIIEQTCCAqmgAwIBAgIUYrz2qv66+yDPs6v9yf0/607rp6swDQYJKoZIhvcNAQEM
 BQAwOjE4MDYGA1UEAwwvNDU0ZjQ5NzEtOTlhOS00MGZkLTljOTgtOTdhNzczN2Rk
 ZGEwIFByb2plY3QgQ0EwHhcNMjQwNjIwMTk0NjQwWhcNMzQwNjE4MTk0NjQwWjA6
@@ -33,20 +22,4 @@ Ps0IL185SElXDHWFMJuIcsw9FzX01E/SNhhwzJZCvzvi5lXb2AYIru8mq1ytLMgu
 YRNQDEqnz2JNIaQI62IJWXVJbSc5WjGpTp0av8PV+sDsanmqtDXLnNCGAHbgdNzv
 ee04pRf7xBEFCKOm1s/+NSQ+lXg3CRBBgHKu2YN90mgYStzJefIMRfG9/WfeLOtP
 Zym6xfT2yjSO8w5AX/VTn9tQMStCvSB8NqDkpsKpAwrdX2wDYg==
------END CERTIFICATE-----`,
-  },
-});
-
-console.log(
-  `Connecting to database ${process.env.DB_NAME} at ${process.env.DB_HOST}:${process.env.DB_PORT} as user ${process.env.DB_USER}`
-);
-
-pool.connect((err) => {
-  if (err) {
-    console.error(`Error connecting to Database: ${err}`);
-  } else {
-    console.log(`Connected to ${process.env.DB_NAME} Database`);
-  }
-});
-
-module.exports = pool;
+-----END CERTIFICATE-----
