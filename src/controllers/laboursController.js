@@ -26,8 +26,8 @@ async function sendOTPEmail(email, otp) {
   const mailOptions = {
     from: process.env.TRANSPORTER_EMAIL,
     to: email,
-    subject: "Password Reset OTP",
-    text: `Your OTP for resetting the password is: ${otp}`,
+    subject: "Your Email OTP",
+    text: `Your OTP is: ${otp}`,
   };
 
   await transporter.sendMail(mailOptions);
