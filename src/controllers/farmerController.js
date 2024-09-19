@@ -602,17 +602,49 @@ const handleReturnApplication = asyncHand((req, res) => {
   });
 });
 
+// const createCheckoutSession = asyncHand((req, res) => {
+//   authenticateUser(req, res, async () => {
+//     const lineItems = req.body.lineItems;
+
+//     try {
+//       const session = await stripe.checkout.sessions.create({
+//         payment_method_types: ["card"],
+//         line_items: lineItems,
+//         mode: "payment",
+//         success_url: `https://apna-bharat-server-2.onrender.com/farmers/success?session_id={CHECKOUT_SESSION_ID}`,
+//         cancel_url: "https://apna-bharat-server-2.onrender.com/farmers/cancel",
+//       });
+
+//       console.log(session);
+//       res.json({ id: session.id });
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json({
+//         error: "An error occurred while creating the checkout session.",
+//       });
+//     }
+//   });
+// });
+
 const createCheckoutSession = asyncHand((req, res) => {
   authenticateUser(req, res, async () => {
-    const lineItems = req.body.lineItems;
+    const { lineItems, customerDetails } = req.body;
 
     try {
+      // Create a customer
+      const customer = await stripe.customers.create({
+        name: customerDetails.name,
+        address: customerDetails.address,
+      });
+
+      // Create a checkout session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: lineItems,
         mode: "payment",
         success_url: `https://apna-bharat-server-2.onrender.com/farmers/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: "https://apna-bharat-server-2.onrender.com/farmers/cancel",
+        customer: customer.id,
       });
 
       console.log(session);
