@@ -642,8 +642,8 @@ const createCheckoutSession = asyncHand((req, res) => {
         payment_method_types: ["card"],
         line_items: lineItems,
         mode: "payment",
-        success_url: `https://apna-bharat-server-2.onrender.com/farmers/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: "https://apna-bharat-server-2.onrender.com/farmers/cancel",
+        success_url: `https://apna-bharat-client.vercel.app/farmers/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: "https://apna-bharat-client.vercel.app/farmers/cancel",
         customer: customer.id,
       });
 
